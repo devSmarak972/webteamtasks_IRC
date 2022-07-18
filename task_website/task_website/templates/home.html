@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+        <style>
+             *{
+                font-family: 'Roboto', sans-serif;
+                --dark-blue:#202b3b;
+                --h-blue:#10151d;
+                --h-blue-light:#2d3d53;
+                --light-blue:#4f79bd;
+                --font-blue:#2b5b8c;
+             }
+          .navbar-nav .nav-item a span{
+                padding: 8px 5px;
+                letter-spacing: 0.25px;
+               
+          }
+          .navbar-nav .nav-item a{
+              font-size: 0.8rem;
+               
+              color:#fff;
+          }
+          
+          .navbar-nav .nav-item{
+               padding: 10px 2px; 
+               border-bottom:solid 2px var(--dark-blue);    
+          }
+          .navbar-nav .nav-item.active{
+           border-bottom:solid 2px #fff;
+           background-color:var(--h-blue);
+          }
+          .navbar-nav .nav-item:hover{
+          
+           background-color:var(--h-blue);
+          }
+          .navbar{
+            padding: 0;
+            background-color: var(--dark-blue);
+          }
+          .nav-item.profile img{
+            border-radius: 50%;
+            width:35px;
+            height:35px;
+            border: solid 2px #fff;
+            object-fit: cover;
+            
+          }
+         .nav-item.profile {
+           padding: 2px;
+            border-bottom: 0px;
+        }
+        #logo{
+        height:40px;
+        margin:2px 5px;
+        
+       }
+       .navbar-brand{
+        padding:6px 10px;
+        display:flex;
+        gap: 5px;
+       }
+       .header-text{
+        font-size: 1rem;
+        padding: 5px 0;
+        
+       }
+       .header-text p{
+        line-height: 1rem;
+        margin-bottom: 0;
+
+       }
+       .division{
+        border-right:solid 2px white;
+
+       }
+       .flx{
+        display:flex;
+        color:white;
+         background-color:#202b3b;
+         margin:20px 0 ;
+         border-radius: 5px;
+         
+       }
+      .country {
+    padding: 10px 5px;
+    flex: 1;
+    text-align: center;
+    border-right:solid 1.5px #063d74;
+    font-size: 0.9rem;
+    font-weight: 400;
+    cursor: pointer;
+}
+.country.active{
+    background-color: var(--h-blue-light);
+    border-right:solid 1.5px #fff;
+
+}
+
+.card-wp {
+    float: left;
+    width: 33.33%;
+    padding: 0px 10px;
+    align-items: center;
+    justify-content: center;
+    margin: 5px auto;
+}
+.card-wp .card{
+    
+    -webkit-box-shadow: 3px 3px 5px 0px rgb(172, 172, 172);
+    -moz-box-shadow: 3px 3px 5px 0px rgba(120,120,120,1);
+    box-shadow: 3px 3px 5px 0px rgba(120,120,120,1);
+}
+
+.wf{
+    width: 100%;
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .card-wp {
+    width: 50%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+.card-wp .card-text p{
+ margin-bottom:0;
+ font-size: 0.9rem;
+ font-weight: 500;
+}
+.fwb{
+    font-weight:800;
+}
+.card-wp .card-text p span i{
+    margin-right:8px;
+
+}
+.apply-btn{
+    background-color: var(--dark-blue);
+    color: #fff;
+    width: 100%;
+}
+.apply-btn:hover{
+    background-color: #2b5b8c;
+    color: #fff;
+}
+.card-body{
+    padding:5px;
+}
+
+.card-text{
+    padding: 8px;
+    margin-bottom: 2px;
+}
+svg {
+  width: 100%;
+  height:100%;
+  overflow: visible;
+  
+}
+.con{
+    width: 100%;
+    height:200px;
+    overflow: hidden;
+}
+.con img{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+@media screen and (max-width:768px) {
+  .card-wp {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+.clip-svg {
+  clip-path: url(#myClip);
+  object-fit: cover;
+  width: 100%;
+
+}
+#myclip{
+    display: none;
+}
+.pabs{
+    position: absolute;
+    z-index: 500;
+
+}
+.info{
+    top: 0px;
+    right: 0px;
+    padding: 6px 12px;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+}
+.con .bookmark {
+    cursor: pointer;
+    top: 0px;
+    left: 0px;
+    padding: 6px 12px;
+    font-size: 1.5rem;
+    color: white;
+}
+
+        </style>
+        <title>Document</title>
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+        <div class="navbar-brand" href="#">
+            <img id="logo" src="./kgp.png">
+            <img id="logo" src="./logo-2.png">
+            <div class="division"></div>
+            <div class="header-text">
+                <p style="font-weight:400 ;margin-bottom:2px">International Relations Cell</p> 
+                <p style="color:var(--light-blue) ;font-weight:600">IIT Kharagpur</p> 
+
+            </div>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class= "collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"><i class="fa fa-landmark" aria-hidden="true"></i><span>Universities</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-file-text" aria-hidden="true"></i><span>My Applications</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa-solid fa-bookmark"></i><span>Bookmarks</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class='fas fa-bell'></i><span>Notifications</span></a>
+                </li>
+                <li class="nav-item profile">
+                    <a class="nav-link" href="#"><img src="./profile.png"></a>
+                </li>
+            </ul>
+           
+        </div>
+    </nav>
+    <div class="container">
+       <div class="flx">
+        <div class="country  active">All</div>
+        <div class="country">North America</div>
+        <div class="country">South America</div>
+        <div class="country">Asia</div>
+        <div class="country">Europe</div>
+        <div class="country" style="border-right:none">Australia</div>
+       </div>
+    <div class="card-container">
+    <div class="card-wp">
+    <div class="card wf">
+        <div class="card-body">
+            <div class="con">
+                <span class="pabs bookmark"><i class="far fa-bookmark"></i></span>
+                <span class="pabs info"><i class="fa-solid fa-circle-info"></i></span>
+            <img class="clip-svg" src="./university2.jpg" alt="univ">
+            </div>
+        <div class="card-text">
+                <h3 style="color:var(--font-blue);">{{name}}</h3>
+                <p><span class="fwb" style="color:var(--font-blue)"><i class="fa fa-globe-americas" aria-hidden="true"></i>Country:</span> Canada</p>
+                <p><span class="fwb" style="color:var(--font-blue);"><i class="fa fa-coins" aria-hidden="true"></i>Expense:</span> 50,000 CAD / year</p>
+                <p><span class="fwb" style="color:red"><i class="fas fa-calendar" aria-hidden="true"></i>Deadline:</span> Nov. 1, 2022</p>
+            </div>
+            <div class="btn apply-btn">Apply</div>
+        </div>
+        </div>
+    </div>
+    
+    
+
+    </div>
+     </div>
+
+     </div>
+
+
+
+
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    
+</body>
+</html>

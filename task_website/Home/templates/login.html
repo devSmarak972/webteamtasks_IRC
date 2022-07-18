@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS only -->
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <style>
+      * {
+        font-family: "Roboto", sans-serif;
+        --dark-blue: #202b3b;
+        --h-blue: #10151d;
+        --h-blue-light: #2d3d53;
+        --light-blue: #4f79bd;
+        --font-blue: #2b5b8c;
+      }
+      .form-con {
+        margin: auto;
+        max-width: 450px;
+        -webkit-box-shadow: 3px 3px 5px 0px rgba(150, 150, 150, 1);
+        -moz-box-shadow: 3px 3px 5px 0px rgba(150, 150, 150, 1);
+        box-shadow: 3px 3px 5px 0px rgba(150, 150, 150, 1);
+        padding: 40px 60px;
+        margin-top: 10%;
+        border-radius: 10px;
+      }
+      .form-control {
+        margin: 10px 0;
+      }
+      .btn-sub {
+        background-color: var(--dark-blue);
+        color: #fff;
+        width: 100%;
+        margin: 12px 0;
+      }
+      .btn-sub:hover {
+        background-color: #2b5b8c;
+        color: #fff;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    {% load custom_tags %}
+    <div class="form-con container">
+      <h3 style="margin-bottom: 1rem; text-align: center">Login</h3>
+      <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label>Username </label>
+          {{ form.username|addclass:'form-control' }}
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          {{ form.password|addclass:'form-control' }}
+        </div>
+        {% if form.errors %} {% for field in form %} {% for error in field.errors %}
+        <div class="alert alert-danger">
+          <strong>{{ error}}</strong>
+        </div>
+        {% endfor %} {% endfor %} {% endif %}
+        <button type="submit" class="btn btn-sub">Submit</button>
+      </form>
+      <p>
+        Don't have an account?
+        <a style="color: #2b5b8c; cursor: pointer" href="/signup">Signup</a>
+      </p>
+    </div>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    {% block javascript %}
+    <script></script>
+    {% endblock javascript %}
+  </body>
+</html>

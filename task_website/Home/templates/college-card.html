@@ -1,0 +1,36 @@
+<div class="card-wp" name="{{Name}}">
+  <div class="card wf">
+    <div class="card-body">
+      <div class="con">
+        <span class="pabs bookmark" name="{{Name}}"
+          ><i class="{{icon}} fa-bookmark"></i
+        ></span>
+        <span class="pabs info"><a href="{{Website}}" style="color:white"><i class="fa-solid fa-circle-info"></i></a></span>
+        <img src="{{imglink}}" alt="univ" />
+      </div>
+      <div class="card-text">
+        <h3 style="color: var(--font-blue)">{{Name}}</h3>
+        <p>
+          <span class="fwb" style="color: var(--font-blue)"
+            ><i class="fa fa-globe-americas" aria-hidden="true"></i
+            >Country:</span
+          >
+         <span class="restext">{{Country}}</span> 
+        </p>
+        <p>
+          <span class="fwb" style="color: var(--font-blue)"
+            ><i class="fa fa-coins" aria-hidden="true"></i>Expense:</span
+          >
+          <span class="restext">{{Expense}}</span>
+        </p>
+        <p>
+          <span class="fwb" style="color: red"
+            ><i class="fas fa-calendar" aria-hidden="true"></i>Deadline:</span
+          >
+          <span class="restext">{{Deadline}}</span>
+        </p>
+      </div>
+      <div class="btn {{apply_status}}" name="{{Name}}">{{applytext}}</div>
+    </div>
+  </div>
+</div>
