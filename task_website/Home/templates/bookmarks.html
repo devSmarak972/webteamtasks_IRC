@@ -394,64 +394,92 @@ color: #fff;
                   }
               }); {% endcomment %}
 
-      $(".bookmark").click(function(event){
-           var tmp=this;
-           var university=$(this).attr("name")
-          if($(this).find(".far").length)
-          {
-              $.ajax({
-              type: "POST",
-              url: "/add/bookmark",
-              data: {'university': university, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
-              success : function(data) {
-
-                  if(data.data.normalize() === "success".normalize())
-                   {
-
-                     $(tmp).find("i").addClass("fas");
-                     $(tmp).find("i").removeClass("far");
-                  }
-                  },
-                  error : function(res){
-                      console.log(res);
-                  }
-              });
-          }
-          else
-          {
-              $.ajax({
-              type: "POST",
-              url: "/remove/bookmark",
-              data: {'university': university, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
-              success : function(data) {
-
-                  if(data.data.normalize() === "success".normalize())
-                   {
-                     $(`.card-wp[name='${university}']`).css("display","none");
-                     $(tmp).find("i").removeClass("fas");
-                    $(tmp).find("i").addClass("far");
-                  }
-                  },
-                  error : function(res){
-                      console.log(res);
-                  }
-              });
-
-          }
-      })
 
 
-$(".apply-btn").click(function(event){
+
+$(document).ready(function() {
+    $(document).on("click",".btn-applied",function(event){
+    const rem=event.currentTarget;
+      const university=$(rem).attr("name");
+       console.log('removing',university);
+        $.ajax({
+        type: "POST",
+        url: "/remove/application", 
+        data: {'university': university, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+        success : function(data) {
+           console.log(data,"removing");
+            if(data.data.normalize() === "success".normalize())
+             {
+               $(rem).addClass("apply-btn");
+               $(rem).html("Apply");
+               $(rem).removeClass("btn-applied");
+            }
+            },
+            error : function(res){
+                console.log(res);
+            } 
+        });
+});
+ $(document).on("click",".bookmark",function(event){
+
      var tmp=this;
      var university=$(this).attr("name")
-   
+    if($(this).find(".far").length)
+    {
+        $.ajax({
+        type: "POST",
+        url: "/add/bookmark", 
+        data: {'university': university, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+        success : function(data) {
+           
+            if(data.data.normalize() === "success".normalize())
+             {
+               
+               $(tmp).find("i").addClass("fas");
+               $(tmp).find("i").removeClass("far");
+            }
+            },
+            error : function(res){
+                console.log(res);
+            } 
+        });
+    }
+    else
+    {
+        $.ajax({
+        type: "POST",
+        url: "/remove/bookmark", 
+        data: {'university': university, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+        success : function(data) {
+           
+            if(data.data.normalize() === "success".normalize())
+             {
+              
+              $(`.card-wp[name='${university}']`).css("display","none");
+               $(tmp).find("i").removeClass("fas");
+              $(tmp).find("i").addClass("far");
+            }
+            },
+            error : function(res){
+                console.log(res);
+            } 
+        });
+         
+    }
+})
+
+
+$(document).on("click",".apply-btn",function(event){
+const tmp=event.currentTarget;
+     const university=$(tmp).attr("name");
+     console.log("add",university);
    
         $.ajax({
         type: "POST",
         url: "/add/application", 
         data: {'university': university, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
         success : function(data) {
-           
+             console.log(data.data,"adding")
             if(data.data.normalize() === "success".normalize())
              {
                
@@ -465,37 +493,19 @@ $(".apply-btn").click(function(event){
                 console.log(res);
             } 
         });
-    })
-$(".btn-applied").click(function(){
-      var tmp=this
-      var university=$(this).attr("name")
-        $.ajax({
-        type: "POST",
-        url: "/remove/application", 
-        data: {'university': university, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
-        success : function(data) {
-           
-            if(data.data.normalize() === "success".normalize())
-             {
-               $(tmp).addClass("apply-btn");
-               $(tmp).removeClass("btn-applied");
-               $(tmp).html("Apply");
-            }
-            },
-            error : function(res){
-                console.log(res);
-            } 
-        });
-         
     
-    })
+})
+
 
 
 $(".profile").click(function(){
     var tmp=this;
 
     $(tmp).find(".profile-det").toggleClass("vis");
-})
+});
+ 
+
+});
     </script>
     {% endblock javascript %}
   </body>

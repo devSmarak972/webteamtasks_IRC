@@ -12,6 +12,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+ 
         <style>
              *{
                 font-family: 'Roboto', sans-serif;
@@ -368,25 +370,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     {% block javascript %}
     <script type="text/javascript">
 $(document).ready(function() {
-    $(function() {
+    
      $(".continent").click(function(el){
         $(".continent.active").removeClass("active");
         this.classList.add("active");
         var continent=$(this).html();
        
         if(continent=="All")continent="";
-        $.ajax({
+        res=$.ajax({
         type: "GET",
         url: "/get/univ", 
         data: {'Continent': continent, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
         success : function(data) {
             document.querySelector('.card-container').innerHTML = data;
+             
              {% comment %} $('.card-container').first().innerHTML = data; {% endcomment %}
             },
             error : function(res){
@@ -394,8 +396,30 @@ $(document).ready(function() {
             } 
         });
 });
-$(function() {
-$(".bookmark").click(function(event){
+$(document).on("click",".btn-applied",function(event){
+    const rem=event.currentTarget;
+      const university=$(rem).attr("name");
+       console.log('removing',university);
+        $.ajax({
+        type: "POST",
+        url: "/remove/application", 
+        data: {'university': university, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+        success : function(data) {
+           console.log(data,"removing");
+            if(data.data.normalize() === "success".normalize())
+             {
+               $(rem).addClass("apply-btn");
+               $(rem).html("Apply");
+               $(rem).removeClass("btn-applied");
+            }
+            },
+            error : function(res){
+                console.log(res);
+            } 
+        });
+});
+ $(document).on("click",".bookmark",function(event){
+
      var tmp=this;
      var university=$(this).attr("name")
     if($(this).find(".far").length)
@@ -439,12 +463,10 @@ $(".bookmark").click(function(event){
          
     }
 })
-});
 
 
-$(function() {
-$(".apply-btn").click(function(event){
-     const tmp=event.currentTarget;
+$(document).on("click",".apply-btn",function(event){
+const tmp=event.currentTarget;
      const university=$(tmp).attr("name");
      console.log("add",university);
    
@@ -467,44 +489,20 @@ $(".apply-btn").click(function(event){
                 console.log(res);
             } 
         });
-    })
-});
-$(function() {
-$(".btn-applied").click(function(event){
-      const rem=event.currentTarget;
-      const university=$(rem).attr("name");
-       console.log('removing',university)
-        $.ajax({
-        type: "POST",
-        url: "/remove/application", 
-        data: {'university': university, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
-        success : function(data) {
-           console.log(data,"removing");
-            if(data.data.normalize() === "success".normalize())
-             {
-               $(rem).addClass("apply-btn");
-               $(rem).html("Apply");
-               $(rem).removeClass("btn-applied");
-            }
-            },
-            error : function(res){
-                console.log(res);
-            } 
-        });
-         
     
-    })
-});
+})
 
-$(function() {
+
+
 $(".profile").click(function(){
     var tmp=this;
 
     $(tmp).find(".profile-det").toggleClass("vis");
-})
-    })
 });
-})
+ 
+
+});
+
 
     </script>
     {% endblock javascript %}

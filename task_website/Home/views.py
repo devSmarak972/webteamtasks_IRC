@@ -140,9 +140,11 @@ def addApplication(request):
         if univ is not None:
             applications = request.user.getApplications()
             print(applications.get("applications"))
-            new_b = applications.get("applications")+[univ]
-            print(new_b,"adding")
-            request.user.setApplications({"applications": new_b})
+            new_b = applications.get("applications")
+            if(univ not in new_b):
+                new_b = new_b+[univ]
+                print(new_b,"adding")
+                request.user.setApplications({"applications": new_b})
         # save the data and after fetch the object in instance
 
         return JsonResponse({"data": "success", "userA": request.user.getApplications()}, status=200)
